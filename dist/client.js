@@ -496,6 +496,27 @@ class Client {
     });
   }
   /**
+   * Rename a mailbox with the given path.
+   *
+   * Rename details:
+   *   https://tools.ietf.org/html/rfc3501#section-6.3.5
+   *
+   * @param {String} path
+   *     The path of the mailbox you would like to delete.  This method will
+   *     handle utf7 encoding for you.
+   * @returns {Promise}
+   *     Promise resolves if mailbox was deleted.
+   */
+
+
+   renameMailbox(path) {
+    this.logger.debug('Renaming mailbox', path, '...');
+    return this.exec({
+      command: 'RENAME',
+      attributes: [(0, _emailjsUtf.imapEncode)(path)]
+    });
+  }
+  /**
    * Runs FETCH command
    *
    * FETCH details:
